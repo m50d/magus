@@ -1,12 +1,14 @@
 package net.homelinux.md401.magus.anidb;
 
-import java.util.List;
-
-import net.anidb.udp.UdpConnection;
-import net.anidb.udp.UdpConnectionFactory;
-
 import static org.easymock.EasyMock.*;
 import static org.fest.assertions.Assertions.assertThat;
+
+import java.util.List;
+
+import net.anidb.udp.AniDbException;
+import net.anidb.udp.UdpConnection;
+import net.anidb.udp.UdpConnectionException;
+import net.anidb.udp.UdpConnectionFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,9 +29,9 @@ public class ConnectionWrapperTest {
 	private MockFunction function;
 	private ConnectionWrapper wrapper;
 	private final List<Object> mocks = Lists.newArrayList();
-	
-	private <T> T mock(Class<T> tclass) {
-		T ret = createMock(tclass);
+
+	private <T> T mock(final Class<T> tclass) {
+		final T ret = createMock(tclass);
 		mocks.add(ret);
 		return ret;
 	}
@@ -44,15 +46,31 @@ public class ConnectionWrapperTest {
 		PowerMock.replay(UdpConnectionFactory.class);
 		wrapper = new ConnectionWrapper();
 	}
-	
-	@Test 
+
+	@Test
 	public void invokesSuppliedFunction() throws Exception {
-		Object expected = new Object();
+		final Object expected = commonFunctionExpectations();
+		replay();
+		assertThat(wrapper.perform(function)).isEqualTo(expected);
+		verify();
+	}
+
+	private Object commonFunctionExpectations() throws UdpConnectionException, AniDbException {
+		final Object expected = new Object();
 		expect(factory.connect(anyInt())).andReturn(connection);
 		expect(function.apply(connection)).andReturn(expected);
 		connection.close();
+		return expected;
+	}
+
+	@Test
+	public void passesUsernameAndPassword() throws Exception {
+		final String username="USERNAME";
+		final String password="PASSWORD";
+		final Object expected = commonFunctionExpectations();
+		connection.authenticate(username, password);
 		replay();
-		assertThat(wrapper.perform(function)).isEqualTo(expected);
+		assertThat(wrapper.performWithAuthentication(username, password, function)).isEqualTo(expected);
 		verify();
 	}
 
