@@ -7,6 +7,7 @@
 	<packaging>apk</packaging>
 	<properties>
 		<powermock.version>1.4.10</powermock.version>
+		<android.sdk.path>C:\Users\Michael\android-sdks</android.sdk.path>
 	</properties>
 	<dependencies>
 		<dependency>
