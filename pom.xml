@@ -12,6 +12,13 @@
 			<version>2.1.2</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.anidb</groupId>
+			<artifactId>javaanidbapi</artifactId>
+			<version>0.3</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/javaanidbapi-0.3.jar</systemPath>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
