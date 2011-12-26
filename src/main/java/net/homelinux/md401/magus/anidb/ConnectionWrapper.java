@@ -1,5 +1,11 @@
 package net.homelinux.md401.magus.anidb;
 
-public class ConnectionWrapper {
+import net.anidb.udp.UdpConnection;
 
+import com.google.common.base.Function;
+
+public class ConnectionWrapper {
+	public <T> T perform(Function<UdpConnection, T> toInvoke) {
+		return null;
+	}
 }
