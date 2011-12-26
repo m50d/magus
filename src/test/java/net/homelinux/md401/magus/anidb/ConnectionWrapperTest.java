@@ -31,6 +31,7 @@ public class ConnectionWrapperTest {
 		expect(UdpConnectionFactory.getInstance()).andReturn(factory);
 		connection = createMock(UdpConnection.class);
 		function = createMock(MockFunction.class);
+		PowerMock.replay(UdpConnectionFactory.class);
 		wrapper = new ConnectionWrapper();
 	}
 	
@@ -39,6 +40,7 @@ public class ConnectionWrapperTest {
 		Object expected = new Object();
 		expect(factory.connect(anyInt())).andReturn(connection);
 		expect(function.apply(connection)).andReturn(expected);
+		connection.close();
 		PowerMock.replayAll();
 		assertThat(wrapper.perform(function)).isEqualTo(expected);
 		PowerMock.verifyAll();
