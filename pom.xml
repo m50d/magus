@@ -5,6 +5,9 @@
 	<artifactId>magus</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>apk</packaging>
+	<properties>
+		<powermock.version>1.4.10</powermock.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.google.android</groupId>
@@ -18,6 +21,16 @@
 			<version>0.3</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/lib/javaanidbapi-0.3.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<version>${powermock.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-easymock</artifactId>
+			<version>${powermock.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
