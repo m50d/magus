@@ -13,11 +13,31 @@ public class ConnectionWrapper {
 	public ConnectionWrapper() {
 		factory = UdpConnectionFactory.getInstance();
 	}
-	
-	public <T> T perform(Function<UdpConnection, T> toInvoke) throws UdpConnectionException, AniDbException {
-		UdpConnection connection = factory.connect(1074);
-		T ret = toInvoke.apply(connection);
+
+	public <T> T perform(final Function<UdpConnection, T> toInvoke)
+			throws UdpConnectionException, AniDbException {
+		final UdpConnection connection = factory.connect(1074);
+		final T ret = toInvoke.apply(connection);
 		connection.close();
 		return ret;
+	}
+
+	public <T> T performWithAuthentication(final String username,
+			final String password, final Function<UdpConnection, T> toInvoke)
+			throws UdpConnectionException, AniDbException {
+		return perform(new Function<UdpConnection, T>() {
+
+			@Override
+			public T apply(final UdpConnection arg0) {
+				try {
+					arg0.authenticate(username, password);
+				} catch (final AniDbException e) {
+					throw new RuntimeException(e);
+				} catch (final UdpConnectionException e) {
+					throw new RuntimeException(e);
+				}
+				return toInvoke.apply(arg0);
+			}
+		});
 	}
 }
