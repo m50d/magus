@@ -36,8 +36,8 @@ public class MagusActivity extends Activity {
 	protected static final int REQUEST_CODE_PICK_FILE_OR_DIRECTORY = 1;
 	protected static final int REQUEST_CODE_GET_CONTENT = 2;
 
-	protected EditText mEditText;
-	protected TextView mTextView;
+	protected EditText editText;
+	protected TextView textView;
 
     /** Called when the activity is first created. */
     @Override
@@ -45,20 +45,12 @@ public class MagusActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        mEditText = (EditText) findViewById(R.id.file_path);
-        mTextView = (TextView) findViewById(R.id.info);
+        editText = (EditText) findViewById(R.id.file_path);
+        textView = (TextView) findViewById(R.id.info);
     }
 
 	public void onClickOpenFile(final View view) {
 		openFile();
-	}
-
-	public void onClickSaveFile(final View view) {
-		saveFile();
-	}
-
-	public void onClickPickDirectory(final View view) {
-		pickDirectory();
 	}
 
 	public void onClickGetContent(final View view) {
@@ -69,7 +61,7 @@ public class MagusActivity extends Activity {
      * Opens the file manager to select a file to open.
      */
     public void openFile() {
-		final String fileName = mEditText.getText().toString();
+		final String fileName = editText.getText().toString();
 
 		final Intent intent = new Intent(FileManagerIntents.ACTION_PICK_FILE);
 
@@ -78,65 +70,14 @@ public class MagusActivity extends Activity {
 		intent.setData(Uri.fromFile(file));
 
 		// Set fancy title and button (optional)
-		intent.putExtra(FileManagerIntents.EXTRA_TITLE, getString(R.string.open_title));
-		intent.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT, getString(R.string.open_button));
+		intent.putExtra(FileManagerIntents.EXTRA_TITLE, "Choose file to add to mylist");
+		intent.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT, "Add to mylist");
 
 		try {
 			startActivityForResult(intent, REQUEST_CODE_PICK_FILE_OR_DIRECTORY);
 		} catch (final ActivityNotFoundException e) {
 			// No compatible file manager was found.
-			Toast.makeText(this, R.string.no_filemanager_installed,
-					Toast.LENGTH_SHORT).show();
-		}
-	}
-
-    /**
-     * Opens the file manager to select a location for saving a file.
-     */
-    private void saveFile() {
-		final String fileName = mEditText.getText().toString();
-
-		final Intent intent = new Intent(FileManagerIntents.ACTION_PICK_FILE);
-
-		// Construct URI from file name.
-		final File file = new File(fileName);
-		intent.setData(Uri.fromFile(file));
-
-		// Set fancy title and button (optional)
-		intent.putExtra(FileManagerIntents.EXTRA_TITLE, getString(R.string.save_title));
-		intent.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT, getString(R.string.save_button));
-
-		try {
-			startActivityForResult(intent, REQUEST_CODE_PICK_FILE_OR_DIRECTORY);
-		} catch (final ActivityNotFoundException e) {
-			// No compatible file manager was found.
-			Toast.makeText(this, R.string.no_filemanager_installed,
-					Toast.LENGTH_SHORT).show();
-		}
-	}
-
-    /**
-     * Opens the file manager to pick a directory.
-     */
-    private void pickDirectory() {
-		final String fileName = mEditText.getText().toString();
-
-		// Note the different intent: PICK_DIRECTORY
-		final Intent intent = new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
-
-		// Construct URI from file name.
-		final File file = new File(fileName);
-		intent.setData(Uri.fromFile(file));
-
-		// Set fancy title and button (optional)
-		intent.putExtra(FileManagerIntents.EXTRA_TITLE, getString(R.string.pick_directory_title));
-		intent.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT, getString(R.string.pick_directory_button));
-
-		try {
-			startActivityForResult(intent, REQUEST_CODE_PICK_FILE_OR_DIRECTORY);
-		} catch (final ActivityNotFoundException e) {
-			// No compatible file manager was found.
-			Toast.makeText(this, R.string.no_filemanager_installed,
+			Toast.makeText(this, "No filemanager installed",
 					Toast.LENGTH_SHORT).show();
 		}
 	}
@@ -154,7 +95,7 @@ public class MagusActivity extends Activity {
 			startActivityForResult(intent, REQUEST_CODE_GET_CONTENT);
 		} catch (final ActivityNotFoundException e) {
 			// No compatible file manager was found.
-			Toast.makeText(this, R.string.no_filemanager_installed,
+			Toast.makeText(this, "No compatible file manager found",
 					Toast.LENGTH_SHORT).show();
 		}
     }
@@ -166,7 +107,7 @@ public class MagusActivity extends Activity {
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		mTextView.setText("");
+		textView.setText("");
 
 		switch (requestCode) {
 		case REQUEST_CODE_PICK_FILE_OR_DIRECTORY:
@@ -176,7 +117,7 @@ public class MagusActivity extends Activity {
 				if (fileUri != null) {
 					final String filePath = fileUri.getPath();
 					if (filePath != null)
-						mEditText.setText(filePath);
+						editText.setText(filePath);
 				}
 			}
 			break;
@@ -198,12 +139,9 @@ public class MagusActivity extends Activity {
 					displayName = c.getString(2);
 					fileSize = c.getLong(3);
 				}
-				if (filePath != null) {
-					mEditText.setText(filePath);
-					final String strFileSize = getString(R.string.get_content_info,
-							displayName, "" + fileSize);
-					mTextView.setText(strFileSize);
-				}
+				if (filePath != null)
+					editText.setText(filePath);
+//					textView.setText(strFileSize);
 			}
 		}
 	}
