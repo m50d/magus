@@ -4,6 +4,28 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <LinearLayout android:orientation="horizontal"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+	    <EditText android:id="@+id/file_path"
+		    android:layout_width="0dip" 
+		    android:layout_height="wrap_content" 
+		    android:layout_weight="1"/>
+
+	    <TextView
+	        android:id="@+id/info"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dip"
+	        android:layout_marginTop="10dip" />
+
+		<ImageButton android:id="@+id/file_manager"
+			android:onClick="onClickOpenFile"
+			android:src="@drawable/ic_launcher_folder_small"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" />
+	</LinearLayout>
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
