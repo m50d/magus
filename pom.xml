@@ -25,6 +25,13 @@
 			<systemPath>${basedir}/lib/javaanidbapi-0.3.jar</systemPath>
 		</dependency>
 		<dependency>
+			<groupId>de.jonelo</groupId>
+			<artifactId>jacksum</artifactId>
+			<version>1.7.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/jacksum-1.7.0.jar</systemPath>
+		</dependency>
+		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-module-junit4</artifactId>
 			<version>${powermock.version}</version>
