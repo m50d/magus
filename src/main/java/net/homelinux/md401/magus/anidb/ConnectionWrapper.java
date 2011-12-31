@@ -17,7 +17,7 @@ public class ConnectionWrapper {
 		factory = UdpConnectionFactory.getInstance();
 	}
 
-	public <T> T perform(final Function<UdpConnection, T> toInvoke)
+	<T> T perform(final Function<UdpConnection, T> toInvoke)
 			throws UdpConnectionException, AniDbException {
 		final UdpConnection connection = factory.connect(1074);
 		final T ret = toInvoke.apply(connection);
@@ -25,7 +25,7 @@ public class ConnectionWrapper {
 		return ret;
 	}
 
-	public <T> T performWithAuthentication(final String username,
+	<T> T performWithAuthentication(final String username,
 			final String password, final Function<UdpConnection, T> toInvoke)
 			throws UdpConnectionException, AniDbException {
 		return perform(new Function<UdpConnection, T>() {
@@ -44,7 +44,7 @@ public class ConnectionWrapper {
 		});
 	}
 
-	void add(final String username, final String password, final int fileSize,
+	public void add(final String username, final String password, final int fileSize,
 			final String ed2kHash, final boolean watched)
 			throws UdpConnectionException, AniDbException {
 		performWithAuthentication(username, password,
