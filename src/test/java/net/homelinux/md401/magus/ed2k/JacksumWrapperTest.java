@@ -9,7 +9,7 @@ public class JacksumWrapperTest {
 	@Test
 	public void formsCorrectHashOfAzumangaWebDaioh() throws Exception {
 		final ClassPathResource resource = new ClassPathResource("Azumanga Daioh - Web.avi");
-		final String path = resource.getPath();
+		final String path = resource.getFile().getAbsolutePath();
 		assertThat(JacksumWrapper.ed2k(path)).isEqualTo("9bbe21007a3aeaeb4f56cc818e4531f2");
 	}
 }
