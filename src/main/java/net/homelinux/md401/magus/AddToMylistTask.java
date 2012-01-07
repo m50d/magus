@@ -1,18 +1,28 @@
 package net.homelinux.md401.magus;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
-public class AddToMylistTask extends AsyncTask<UsernamePasswordFile, Void, Void> {
+public class AddToMylistTask extends AsyncTask<UsernamePasswordFile, Void, String> {
 	private final FileHandler handler;
-	public AddToMylistTask(final FileHandler handler){
+	private final Context context;
+	public AddToMylistTask(final FileHandler handler, Context context){
 		this.handler = handler;
+		this.context = context;
 	}
 
 	@Override
-	protected Void doInBackground(UsernamePasswordFile... params) {
+	protected String doInBackground(UsernamePasswordFile... params) {
 		UsernamePasswordFile param = params[0];
 		handler.addFile(param.username, param.password, true, param.file);
-		return null;
+		return param.file.getName();
+	}
+	
+	@Override
+	protected void onPostExecute(String result) {
+		Toast.makeText(context, "Added " + result + " to mylist as watched.",
+			Toast.LENGTH_SHORT).show();
 	}
 
 }
