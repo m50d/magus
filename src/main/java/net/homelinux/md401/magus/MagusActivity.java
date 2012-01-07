@@ -77,7 +77,7 @@ public class MagusActivity extends Activity {
 			startActivityForResult(intent, REQUEST_CODE_PICK_FILE_OR_DIRECTORY);
 		} catch (final ActivityNotFoundException e) {
 			// No compatible file manager was found.
-			Toast.makeText(this, "No filemanager installed",
+			Toast.makeText(this, "No filemanager installed. Please install OI File Manager from market",
 					Toast.LENGTH_SHORT).show();
 		}
 	}

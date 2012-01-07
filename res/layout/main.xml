@@ -3,36 +3,20 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-	    <EditText android:id="@+id/file_path"
-		    android:layout_width="0dip" 
-		    android:layout_height="0dip" 
-		    android:layout_weight="1"/>
 
-	    <TextView
-	        android:id="@+id/info"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_marginLeft="10dip"
-	        android:layout_marginTop="10dip" />
-
-		<ImageButton android:id="@+id/file_manager"
-			android:onClick="onClickOpenFile"
-			android:src="@drawable/ic_launcher_folder_small"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:contentDescription="launch file manager" />
     <LinearLayout
         android:id="@+id/linearLayout0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-<!--         <CheckBox -->
-<!--             android:id="@+id/checkBox1" -->
-<!--             android:layout_width="wrap_content" -->
-<!--             android:layout_height="wrap_content" -->
-<!--             android:text="Watched" /> -->
+        <!-- <CheckBox -->
+        <!-- android:id="@+id/checkBox1" -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:text="Watched" /> -->
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
@@ -44,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="Username"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
+
         <EditText
             android:id="@+id/editText1"
             android:layout_width="wrap_content"
@@ -76,5 +60,26 @@
             <requestFocus />
         </EditText>
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/file_path"
+        android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="10dip" />
+
+    <ImageButton
+        android:id="@+id/file_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="launch file manager"
+        android:onClick="onClickOpenFile"
+        android:src="@drawable/ic_launcher_folder_small" />
 
 </LinearLayout>
