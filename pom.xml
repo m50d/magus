@@ -6,7 +6,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>apk</packaging>
 	<properties>
-		<android.sdk.path>C:\Users\Michael\android-sdks</android.sdk.path>
+		<android.sdk.path>C:\Users\Michael\android-sdk</android.sdk.path>
 	</properties>
 	<dependencies>
 		<dependency>
