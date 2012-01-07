@@ -35,15 +35,16 @@ import android.widget.Toast;
 public class MagusActivity extends Activity {
 	protected static final int REQUEST_CODE_PICK_FILE_OR_DIRECTORY = 1;
 	protected static final int REQUEST_CODE_GET_CONTENT = 2;
-	private View username;
-	private View password;
+	private static final FileHandler fileHandler = new FileHandler();
+	private TextView username;
+	private TextView password;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
+        username = (TextView) findViewById(R.id.username);
+        password = (TextView) findViewById(R.id.password);
     }
 
 	public void onClickOpenFile(final View view) {
@@ -96,6 +97,7 @@ public class MagusActivity extends Activity {
 				if (fileUri != null) {
 					final String filePath = fileUri.getPath();
 					File file = new File(filePath).getAbsoluteFile();
+					fileHandler.addFile(username.getText(), password.getText(), true, file);
 				}
 			}
 			return;
