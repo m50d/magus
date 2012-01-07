@@ -56,7 +56,7 @@ public class MagusActivity extends Activity {
 		} catch (final ActivityNotFoundException e) {
 			// No compatible file manager was found.
 			Toast.makeText(this, "No filemanager installed. Please install OI File Manager from market",
-					Toast.LENGTH_SHORT).show();
+					Toast.LENGTH_LONG).show();
 		}
 	}
 
