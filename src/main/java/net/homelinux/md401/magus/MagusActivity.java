@@ -93,7 +93,7 @@ public class MagusActivity extends Activity {
 				if (fileUri != null) {
 					final String filePath = fileUri.getPath();
 					File file = new File(filePath).getAbsoluteFile();
-					fileHandler.addFile(username.getText(), password.getText(), true, file);
+					new AddToMylistTask(fileHandler).execute(new UsernamePasswordFile(username.getText(), password.getText(), file));
 				}
 			}
 			return;
