@@ -4,11 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/linearLayout0"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
         <TableLayout
             android:id="@+id/tableLayout1"
             android:layout_width="match_parent"
@@ -61,8 +56,6 @@
 
             </TableRow>
         </TableLayout>
-
-    </LinearLayout>
 
     <ImageButton
         android:id="@+id/file_manager"
