@@ -30,7 +30,6 @@ import android.widget.Toast;
 
 public class MagusActivity extends Activity {
 	protected static final int REQUEST_CODE_PICK_FILE_OR_DIRECTORY = 1;
-	protected static final int REQUEST_CODE_GET_CONTENT = 2;
 	private static final FileHandler fileHandler = new FileHandler();
 	private TextView username;
 	private TextView password;
@@ -47,9 +46,6 @@ public class MagusActivity extends Activity {
 		openFile();
 	}
 
-    /**
-     * Opens the file manager to select a file to open.
-     */
     public void openFile() {
 		final Intent intent = new Intent(FileManagerIntents.ACTION_PICK_FILE);
 		intent.setData(Uri.fromFile(new File("")));
@@ -64,29 +60,10 @@ public class MagusActivity extends Activity {
 		}
 	}
 
-//    public void getContent() {
-//
-//		final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//		intent.setType("*/*");
-//		intent.addCategory(Intent.CATEGORY_OPENABLE);
-//
-//		try {
-//			startActivityForResult(intent, REQUEST_CODE_GET_CONTENT);
-//		} catch (final ActivityNotFoundException e) {
-//			// No compatible file manager was found.
-//			Toast.makeText(this, "No compatible file manager found",
-//					Toast.LENGTH_SHORT).show();
-//		}
-//    }
-
-    /**
-     * This is called after the file manager finished.
-     */
 	@Override
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		switch (requestCode) {
-		case REQUEST_CODE_PICK_FILE_OR_DIRECTORY:
+		if (requestCode == REQUEST_CODE_PICK_FILE_OR_DIRECTORY) {
 			if (resultCode == RESULT_OK && data != null) {
 				// obtain the filename
 				final Uri fileUri = data.getData();
@@ -96,26 +73,6 @@ public class MagusActivity extends Activity {
 					new AddToMylistTask(fileHandler).execute(new UsernamePasswordFile(username.getText(), password.getText(), file));
 				}
 			}
-			return;
-//		case REQUEST_CODE_GET_CONTENT:
-//			if (resultCode == RESULT_OK && data != null) {
-//				String filePath = null;
-//				long fileSize = 0;
-//				String displayName = null;
-//				final Uri uri = data.getData();
-//				final Cursor c = getContentResolver().query(uri, new String[] {MediaStore.MediaColumns.DATA,
-//					MediaStore.MediaColumns.MIME_TYPE,
-//					MediaStore.MediaColumns.DISPLAY_NAME,
-//					MediaStore.MediaColumns.SIZE
-//				}, null, null, null);
-//				if (c != null && c.moveToFirst()) {
-//					final int id = c.getColumnIndex(MediaColumns.DATA);
-//					if (id != -1)
-//						filePath = c.getString(id);
-//					displayName = c.getString(2);
-//					fileSize = c.getLong(3);
-//				}
-//			}
 		}
 	}
 }
