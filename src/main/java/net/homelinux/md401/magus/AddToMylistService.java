@@ -5,7 +5,7 @@ import android.app.Notification;
 import android.content.Intent;
 
 public class AddToMylistService extends IntentService {
-	private final FileHandler handler = new FileHandler();
+	private static final FileHandler handler = new FileHandler();
 	private static final int SCIENTIST = 7;
 	public AddToMylistService(){
 		super("AddFilesToMylist");
