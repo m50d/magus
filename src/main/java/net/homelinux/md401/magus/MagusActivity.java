@@ -69,7 +69,7 @@ public class MagusActivity extends Activity {
 				if (fileUri != null) {
 					final String filePath = fileUri.getPath();
 					File file = new File(filePath).getAbsoluteFile();
-					UsernamePasswordFile usernamePasswordFile = new UsernamePasswordFile(username.getText(), password.getText(), file);
+					UsernamePasswordFile usernamePasswordFile = new UsernamePasswordFile(username.getText().toString(), password.getText().toString(), file);
 					Intent intent = new Intent(this, AddToMylistService.class);
 					intent.putExtra(UsernamePasswordFile.USERNAME_PASSWORD_FILE, usernamePasswordFile);
 					startService(intent);
