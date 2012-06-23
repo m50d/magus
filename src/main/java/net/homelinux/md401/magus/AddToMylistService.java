@@ -13,7 +13,7 @@ public class AddToMylistService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		UsernamePasswordFile param = (UsernamePasswordFile) intent.getSerializableExtra("UsernamePasswordFile");
+		UsernamePasswordFile param = (UsernamePasswordFile) intent.getSerializableExtra(UsernamePasswordFile.USERNAME_PASSWORD_FILE);
 //		NotificationManager notificationService = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		Notification notification = new Notification.Builder(this).setContentTitle("Hashing File").getNotification();
 		startForeground(SCIENTIST, notification);

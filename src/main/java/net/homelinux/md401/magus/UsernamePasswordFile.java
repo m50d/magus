@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.Serializable;
 
 public class UsernamePasswordFile implements Serializable {
+	public static final String USERNAME_PASSWORD_FILE = "UsernamePasswordFile";
 	private static final long serialVersionUID = 1L;
 	public final CharSequence username, password;
 	public final File file;
