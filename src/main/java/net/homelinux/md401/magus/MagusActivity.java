@@ -30,7 +30,6 @@ import android.widget.Toast;
 
 public class MagusActivity extends Activity {
 	protected static final int REQUEST_CODE_PICK_FILE_OR_DIRECTORY = 1;
-	private static final FileHandler fileHandler = new FileHandler();
 	private TextView username;
 	private TextView password;
 
