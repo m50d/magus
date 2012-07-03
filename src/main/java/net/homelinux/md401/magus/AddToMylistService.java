@@ -3,6 +3,7 @@ package net.homelinux.md401.magus;
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 
 public class AddToMylistService extends IntentService {
@@ -16,7 +17,11 @@ public class AddToMylistService extends IntentService {
 	protected void onHandleIntent(Intent intent) {
 		UsernamePasswordFile param = (UsernamePasswordFile) intent.getSerializableExtra(UsernamePasswordFile.USERNAME_PASSWORD_FILE);
 		NotificationManager notificationService = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		Intent i = new Intent(this, MagusActivity.class);
+		PendingIntent pi = PendingIntent.getActivity(this, 0, i, 0);
 		Notification notification = new Notification.Builder(this).setContentTitle("Hashing File").getNotification();
+		notification.setLatestEventInfo(this, "Hashing File", "Hashing File", pi);
+		notification.flags |= Notification.FLAG_NO_CLEAR;
 		startForeground(SCIENTIST, notification);
 		String s;
 		try {
