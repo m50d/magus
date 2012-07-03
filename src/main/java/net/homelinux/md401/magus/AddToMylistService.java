@@ -30,7 +30,7 @@ public class AddToMylistService extends IntentService {
 		} catch (FailureException e) {
 			s = e.detail;
 		}
-		notificationService.notify(SCIENTIST, new Notification.Builder(this).setContentText(s).getNotification());
+		notificationService.notify(SCIENTIST, new Notification.Builder(this).setContentTitle(s).setSmallIcon(R.drawable.status_magi).getNotification());
 	}
 
 }
