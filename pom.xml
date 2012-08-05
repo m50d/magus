@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>net.homelinux.md401</groupId>
 			<artifactId>libmagus</artifactId>
-			<version>0.3.1-SNAPSHOT</version>
+			<version>0.3.1</version>
 		</dependency>
 	</dependencies>
 	<build>
