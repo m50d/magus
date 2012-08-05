@@ -29,6 +29,8 @@ public class AddToMylistService extends IntentService {
 			s = "Added " + param.file.getName() + " to mylist as watched.";
 		} catch (FailureException e) {
 			s = e.detail;
+		} catch (Exception e) {
+			s = e.getMessage();
 		}
 		notificationService.notify(SCIENTIST, new Notification.Builder(this).setContentTitle(s).setSmallIcon(R.drawable.status_magi).getNotification());
 	}
