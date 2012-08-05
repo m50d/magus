@@ -22,6 +22,8 @@ import org.openintents.intents.FileManagerIntents;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -39,6 +41,9 @@ public class MagusActivity extends Activity {
         setContentView(R.layout.main);
         username = (TextView) findViewById(R.id.username);
         password = (TextView) findViewById(R.id.password);
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        username.setText(preferences.getString("username", ""));
+        password.setText(preferences.getString("password", ""));
     }
 
 	public void onClickOpenFile(final View view) {
@@ -73,9 +78,18 @@ public class MagusActivity extends Activity {
 					Intent intent = new Intent(this, AddToMylistService.class);
 					intent.putExtra(UsernamePasswordFile.USERNAME_PASSWORD_FILE, usernamePasswordFile);
 					startService(intent);
-//					new AddToMylistTask(fileHandler, this).execute(usernamePasswordFile);
 				}
 			}
 		}
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        Editor editor = preferences.edit();
+        editor.putString("username", username.getText().toString());
+        editor.putString("password", password.getText().toString());
+        editor.commit();
 	}
 }
