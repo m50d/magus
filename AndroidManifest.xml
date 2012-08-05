@@ -9,7 +9,8 @@
 
     <application
         android:icon="@drawable/icon_magi"
-        android:label="@string/app_name" >
+        android:label="@string/app_name"
+        android:debuggable="true" >
         <activity
             android:name=".MagusActivity"
             android:label="@string/app_name" >
