@@ -19,8 +19,8 @@ public class AddToMylistService extends IntentService {
 		NotificationManager notificationService = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		Intent i = new Intent(this, MagusActivity.class);
 		PendingIntent pi = PendingIntent.getActivity(this, 0, i, 0);
-		Notification notification = new Notification.Builder(this).setContentTitle("Hashing File").setSmallIcon(R.drawable.status_magi).getNotification();
-		notification.setLatestEventInfo(this, "Hashing File", "Hashing File", pi);
+		Notification notification = new Notification.Builder(this).setContentTitle("Hashing File").setContentText("Hashing File")
+				.setContentIntent(pi).setSmallIcon(R.drawable.status_magi).getNotification();
 		notification.flags |= Notification.FLAG_NO_CLEAR;
 		startForeground(SCIENTIST, notification);
 		String s;
